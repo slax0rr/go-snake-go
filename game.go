@@ -1,10 +1,8 @@
-package game
+package main
 
 import (
-	"clear"
 	"github.com/nsf/termbox-go"
 	"math/rand"
-	"tbhelper"
 	"time"
 )
 
@@ -32,8 +30,8 @@ var points int = 0
 // in milliseconds
 const speed = 100 * time.Millisecond
 
-func Start() {
-	clear.ClearWindow()
+func GameStart() {
+	ClearWindow()
 	drawField(boundaries[2], boundaries[3])
 
 	position := getStartingPosition()
@@ -63,7 +61,7 @@ movement:
 			if snake.checkColision() == true {
 				break movement
 			}
-			clear.ClearWindow()
+			ClearWindow()
 			drawField(boundaries[2], boundaries[3])
 			snake.draw()
 			spawnFood()
@@ -72,7 +70,7 @@ movement:
 		}
 	}
 
-	tbhelper.Printf(0, 0, termbox.ColorWhite, termbox.ColorBlack, "Game over, Points: %d", points)
+	Printf(0, 0, termbox.ColorWhite, termbox.ColorBlack, "Game over, Points: %d", points)
 	termbox.Flush()
 }
 
@@ -148,7 +146,7 @@ func (snake *Snake) updatePosition() {
 
 func (snake *Snake) draw() {
 	for _, part := range snake.parts {
-		tbhelper.Printf(part.x, part.y, termbox.ColorWhite, termbox.ColorWhite, " ")
+		Printf(part.x, part.y, termbox.ColorWhite, termbox.ColorWhite, " ")
 	}
 }
 
@@ -164,16 +162,16 @@ func getStartingPosition() map[string][]int {
 }
 
 func drawField(maxX, maxY int) {
-	clear.ClearWindow()
+	ClearWindow()
 	x := boundaries[0]
 	for ; x <= maxX; x++ {
-		tbhelper.Printf(x, boundaries[1], termbox.ColorWhite, termbox.ColorWhite, " ")
-		tbhelper.Printf(x, maxY, termbox.ColorWhite, termbox.ColorWhite, " ")
+		Printf(x, boundaries[1], termbox.ColorWhite, termbox.ColorWhite, " ")
+		Printf(x, maxY, termbox.ColorWhite, termbox.ColorWhite, " ")
 	}
 	y := boundaries[1]
 	for ; y <= maxY; y++ {
-		tbhelper.Printf(boundaries[0], y, termbox.ColorWhite, termbox.ColorWhite, " ")
-		tbhelper.Printf(maxX, y, termbox.ColorWhite, termbox.ColorWhite, " ")
+		Printf(boundaries[0], y, termbox.ColorWhite, termbox.ColorWhite, " ")
+		Printf(maxX, y, termbox.ColorWhite, termbox.ColorWhite, " ")
 	}
 }
 
@@ -214,5 +212,5 @@ func spawnFood() {
 		}
 	}
 
-	tbhelper.Printf(foodPosition[0], foodPosition[1], termbox.ColorRed, termbox.ColorRed, " ")
+	Printf(foodPosition[0], foodPosition[1], termbox.ColorRed, termbox.ColorRed, " ")
 }

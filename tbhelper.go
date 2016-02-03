@@ -1,4 +1,4 @@
-package tbhelper
+package main
 
 import (
 	"fmt"
